@@ -116,3 +116,247 @@ img { max-width: 100%; display: block; }
 .hamburger {
   background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;
 }
+.main {
+  flex: 1;
+  padding: 36px 42px;
+  max-width: 1100px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+.page-header .eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+  display: block;
+}
+.page-header h1 { font-size: 2rem; }
+.page-header p { color: var(--text-muted); margin-top: 6px; max-width: 560px; }
+
+.receipt-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  padding: 24px;
+}
+
+.receipt-card::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 6px;
+  background-image: radial-gradient(circle, var(--bg) 3px, transparent 3.5px);
+  background-size: 14px 12px;
+  background-position: center top;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.stat-card .label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.stat-card .value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.stat-card.income .value { color: var(--income); }
+.stat-card.expense .value { color: var(--expense); }
+.stat-card.balance .value { color: var(--primary); }
+
+.hero-balance {
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-balance .eyebrow { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.hero-balance .amount { font-family: 'IBM Plex Mono', monospace; font-size: 2.8rem; font-weight: 600; margin: 6px 0; }
+.hero-balance p { color: #C9D8CF; max-width: 480px; }
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+table { width: 100%; border-collapse: collapse; min-width: 480px; }
+thead { background: #F1EEE4; }
+th, td {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #FBFAF6; }
+td.amount { font-family: 'IBM Plex Mono', monospace; font-weight: 500; }
+td.amount.income { color: var(--income); }
+td.amount.expense { color: var(--expense); }
+
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #EFEAE0;
+  color: var(--text-muted);
+}
+
+.row-actions button {
+  border: none; background: none; cursor: pointer;
+  color: var(--expense); font-size: 0.85rem; font-weight: 500;
+}
+.row-actions button:hover { text-decoration: underline; }
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  max-width: 520px;
+}
+.form-row { margin-bottom: 18px; }
+.form-row label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  background: #FBFAF6;
+}
+.form-row input:focus,
+.form-row select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.type-toggle { display: flex; gap: 10px; }
+.type-toggle label {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.type-toggle input { display: none; }
+.type-toggle input:checked + span { color: inherit; }
+.type-toggle .opt-income:has(input:checked) { border-color: var(--income); background: #EAF3EC; color: var(--income); }
+.type-toggle .opt-expense:has(input:checked) { border-color: var(--expense); background: #F7EAE6; color: var(--expense); }
+
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--primary-light); }
+.btn.secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.btn.secondary:hover { background: #EFEAE0; }
+
+.form-msg { font-size: 0.85rem; margin-top: 10px; display: none; }
+.form-msg.show { display: block; }
+.form-msg.error { color: var(--expense); }
+.form-msg.success { color: var(--income); }
+
+.budget-list { display: flex; flex-direction: column; gap: 16px; }
+.budget-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+.budget-item .top-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.budget-item .cat-name { font-weight: 600; }
+.budget-item .cat-figures { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--text-muted); }
+.bar-track { height: 10px; border-radius: 6px; background: #EFEAE0; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; background: var(--income); transition: width 0.3s ease; }
+.bar-fill.over { background: var(--expense); }
+.budget-item .warn { font-size: 0.78rem; color: var(--expense); margin-top: 6px; }
+
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; margin-bottom: 28px; }
+.bar-chart { display: flex; align-items: flex-end; gap: 14px; height: 200px; margin-top: 20px; }
+.bar-chart .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.bar-chart .bar { width: 100%; max-width: 40px; border-radius: 4px 4px 0 0; background: var(--primary); transition: height 0.4s ease; }
+.bar-chart .bar-col .val { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px; }
+.bar-chart .bar-col .lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; }
+
+.media-frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin: 20px 0;
+}
+video { width: 100%; display: block; background: #000; }
+
+.two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: start; }
+
+.tip-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.tip-list li { padding-left: 26px; position: relative; color: var(--text-muted); font-size: 0.94rem; }
+.tip-list li::before { content: "•"; position: absolute; left: 6px; color: var(--accent); font-weight: 700; }
+
+.link-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.link-list a { font-size: 0.9rem; }
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+.empty-state span { display: block; font-size: 2rem; margin-bottom: 8px; }
+
+@media (max-width: 880px) {
+  .app-shell { flex-direction: column; }
+  .sidebar { display: none; }
+  .sidebar.open { display: flex; position: fixed; z-index: 50; inset: 0; width: 100%; height: 100%; overflow-y: auto; }
+  .topbar { display: flex; position: sticky; top: 0; z-index: 40; }
+  .main { padding: 24px 18px; max-width: 100%; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .hero-balance .amount { font-size: 2.1rem; }
+}

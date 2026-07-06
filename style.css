@@ -40,3 +40,79 @@ a:hover { color: var(--accent); }
 .mono { font-family: 'IBM Plex Mono', monospace; }
 
 img { max-width: 100%; display: block; }
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--primary);
+  color: #F1EEE4;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand .coin {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.nav-menu { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+.nav-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #D9E4DD;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.15s ease;
+}
+
+.nav-menu a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav-menu a.active { background: var(--accent); color: var(--primary); font-weight: 600; }
+
+.sidebar-footer {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: #9DB3A8;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 14px;
+}
+.sidebar-footer a { color: #D9E4DD; }
+
+.topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 18px;
+}
+.topbar .brand { font-size: 1.15rem; }
+.hamburger {
+  background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;
+}

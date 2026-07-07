@@ -5,11 +5,15 @@ function loginAccount() {
 
     if (username === "" || password === "") {
         alert("Username dan Password tidak boleh kosong!");
+        localStorage.setItem("isLogin", "false");
+    }
+    else {
+        alert("Login Berhasil!");
+        localStorage.setItem("isLogin", "true");
+        window.location.href = "index.html";
         return;
     }
 
-    localStorage.setItem("isLogin", "true");
-    alert("Login berhasil!");
 }
 
 // ================= DATA TRANSAKSI =================

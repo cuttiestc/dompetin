@@ -367,3 +367,65 @@ video { width: 100%; display: block; background: #000; }
 }
 
 
+/* ================= ANGGARAN ================= */
+
+.budget-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.budget-item{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.top-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-weight:600;
+}
+
+.cat-name{
+    color:#0f4c5c;
+}
+
+.cat-figures{
+    color:#666;
+}
+
+.bar-track{
+    width:100%;
+    height:12px;
+    background:#e5e5e5;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.bar-fill{
+    height:100%;
+    background:#2e8b57;
+    border-radius:20px;
+    transition:.3s;
+}
+
+.bar-fill.over{
+    background:#dc3545;
+}
+
+.warn{
+    color:#dc3545;
+    margin-top:8px;
+    font-size:.9rem;
+}
+
+.empty-state{
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    color:#777;
+}

@@ -73,3 +73,29 @@ function formatTanggal(tanggal) {
         year: "numeric"
     });
 }
+
+// ================= DATA ANGGARAN =================
+function getBudget() {
+    return JSON.parse(localStorage.getItem("budget")) || [];
+}
+
+function saveBudget(data) {
+    localStorage.setItem("budget", JSON.stringify(data));
+}
+
+// ================= SIMPAN TRANSAKSI =================
+function saveTransaksi(data) {
+    localStorage.setItem("transaksi", JSON.stringify(data));
+}
+
+// ================= MENU MOBILE =================
+document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.getElementById("hamburger");
+    const sidebar = document.getElementById("sidebar");
+
+    if (hamburger && sidebar) {
+        hamburger.addEventListener("click", function () {
+            sidebar.classList.toggle("open");
+        });
+    }
+});

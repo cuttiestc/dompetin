@@ -1,115 +1,70 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beranda - DompetIn</title>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/x-icon" href="logo.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DompetIn</title>
+    <link rel="icon" type="image/x-icon" href="logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
-<body>
-
-<div class="topbar">
-  <div class="brand"><span class="coin">Rp</span> DompetIn</div>
-  <button class="hamburger" id="hamburger">☰</button>
-</div>
-
-<div class="app-shell">
-  <aside class="sidebar" id="sidebar">
-    <div class="brand"><span class="coin">Rp</span> DompetIn</div>
-    <ul class="nav-menu">
-      <li><a href="index.html" class="active"> Beranda</a></li>
-      <li><a href="transaksi.html">Transaksi</a></li>
-      <li><a href="anggaran.html">Anggaran</a></li>
-      <li><a href="laporan.html">Laporan</a></li>
-    </ul>
-    <div class="sidebar-footer">
-      <a href="tentang.html">Tentang aplikasi ini →</a>
-    </div>
-  </aside>
-
-  <main class="main">
-    <div class="page-header">
-      <span class="eyebrow">Ringkasan</span>
-      <h1>Halo, ini kondisi dompetmu</h1>
-      <p>Pantau pemasukan, pengeluaran, dan sisa saldo kamu bulan ini dalam satu tampilan.</p>
-    </div>
-
-    <div class="hero-balance">
-      <span class="eyebrow">Saldo saat ini</span>
-      <div class="amount mono" id="heroBalance">Rp0</div>
-      <p>Saldo dihitung otomatis dari semua transaksi pemasukan dikurangi pengeluaran yang sudah kamu catat.</p>
-    </div>
-
-    <div class="stat-grid">
-      <div class="stat-card income">
-        <div class="label">Total Pemasukan</div>
-        <div class="value" id="totalIncome">Rp0</div>
-      </div>
-      <div class="stat-card expense">
-        <div class="label">Total Pengeluaran</div>
-        <div class="value" id="totalExpense">Rp0</div>
-      </div>
-      <div class="stat-card balance">
-        <div class="label">Jumlah Transaksi</div>
-        <div class="value" id="totalCount">0</div>
-      </div>
-    </div>
-
-    <div class="receipt-card" style="margin-bottom:14px;">
-      <h3 style="margin-bottom:14px;">Transaksi Terbaru</h3>
-      <div class="table-wrap" id="recentWrap">
-        <table>
-          <thead>
-            <tr><th>Tanggal</th><th>Deskripsi</th><th>Kategori</th><th>Jumlah</th></tr>
-          </thead>
-          <tbody id="recentBody"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <p style="margin-top:18px; font-size:0.9rem; color:var(--text-muted);">
-      Mau catat transaksi baru? Ke halaman <a href="transaksi.html">Transaksi</a>. Mau atur batas belanja per kategori? Buka <a href="anggaran.html">Anggaran</a>.
-    </p>
-  </main>
-</div>
-
-<script src="app.js"></script>
-<script>
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const data = getTransaksi();
-
-    let income = 0, expense = 0;
-    data.forEach(function (t) {
-      if (t.tipe === 'income') income += t.jumlah;
-      else expense += t.jumlah;
-    });
-    const balance = income - expense;
-
-    document.getElementById('heroBalance').textContent = formatRupiah(balance);
-    document.getElementById('totalIncome').textContent = formatRupiah(income);
-    document.getElementById('totalExpense').textContent = formatRupiah(expense);
-    document.getElementById('totalCount').textContent = data.length;
-
-    const recent = data.slice().sort(function (a, b) {
-      return new Date(b.tanggal) - new Date(a.tanggal);
-    }).slice(0, 5);
-
-    const body = document.getElementById('recentBody');
-    if (recent.length === 0) {
-      body.innerHTML = '<tr><td colspan="4">Belum ada transaksi.</td></tr>';
-    } else {
-      body.innerHTML = recent.map(function (t) {
-        return '<tr>' +
-          '<td>' + formatTanggal(t.tanggal) + '</td>' +
-          '<td>' + t.deskripsi + '</td>' +
-          '<td><span class="tag">' + t.kategori + '</span></td>' +
-          '<td class="amount ' + t.tipe + '">' + (t.tipe === 'income' ? '+' : '-') + formatRupiah(t.jumlah) + '</td>' +
-          '</tr>';
-      }).join('');
+<style>
+    body {
+        background-color: #f8f9fa;
     }
-  });
-</script>
+    .btn-login {
+        background-color: #3E63DD;
+        border-color: #3E63DD;
+        color: #fff;
+    }
+    .btn-login:hover {
+        background-color: #6B7280;
+        border-color: #6B7280;
+        color: #fff;
+    }
+    body .container {
+        margin-top: 100px;
+    }
+
+</style>
+<body>
+    <div class="container" style="max-width: 500px">
+      <div class="card shadow border-0 p-4 rounded-4">
+        <img src="logo.svg" alt="Logo" class="mx-auto d-block mb-4" style="width: 100px; height: 100px;">
+        <h2 class="text-center text-dark mb-4 fw-bold">Login to Your Account</h2>
+        <p class="text-center text-muted mb-4">Please enter your username and password to login.</p>
+
+        <div class="mb-4">
+          <input
+            type="text"
+            id="usernameInput"
+            class="form-control form-control-lg fs-6"
+            placeholder="Masukkan username"
+          />
+        </div>
+
+        <div class="mb-4">
+          <input
+            type="password"
+            id="passwordInput"
+            class="form-control form-control-lg fs-6"
+            placeholder="Masukkan password"
+          />
+        </div>
+
+        <div class="row g-3 justify-content-center mb-4">
+          <div class="col-6">
+            <button
+              class="btn btn-login w-100 py-2 fw-semibold
+            d-flex align-items-center justify-content-center gap-2 "
+              onclick="loginAccount()">Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src = "app.js"></script>
+
 </body>
 </html>

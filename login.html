@@ -12,6 +12,16 @@
     body {
         background-color: #f8f9fa;
     }
+    .btn-login {
+        background-color: #3E63DD;
+        border-color: #3E63DD;
+        color: #fff;
+    }
+    .btn-login:hover {
+        background-color: #6B7280;
+        border-color: #6B7280;
+        color: #fff;
+    }
     body .container {
         margin-top: 100px;
     }
@@ -20,6 +30,7 @@
 <body>
     <div class="container" style="max-width: 500px">
       <div class="card shadow border-0 p-4 rounded-4">
+        <img src="logo.svg" alt="Logo" class="mx-auto d-block mb-4" style="width: 100px; height: 100px;">
         <h2 class="text-center text-dark mb-4 fw-bold">Login to Your Account</h2>
         <p class="text-center text-muted mb-4">Please enter your username and password to login.</p>
 
@@ -44,7 +55,7 @@
         <div class="row g-3 justify-content-center mb-4">
           <div class="col-6">
             <button
-              class="btn btn-success w-100 py-2 fw-semibold
+              class="btn btn-login w-100 py-2 fw-semibold
             d-flex align-items-center justify-content-center gap-2 "
               onclick="loginAccount()">Login
             </button>

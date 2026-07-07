@@ -10,7 +10,7 @@ function loginAccount() {
     else {
         alert("Login Berhasil!");
         localStorage.setItem("isLogin", "true");
-        window.location.href = "index.html";
+        window.location.href = "beranda.html";
         return;
     }
 

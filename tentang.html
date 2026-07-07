@@ -1,11 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang - DompetIn</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DompetIn — Tentang</title>
+<link rel="stylesheet" href="style.css">
+>>>>>>> 0c7d1b2 (update tentang)
 </head>
 <body>
-    
+
+<div class="topbar">
+  <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+  <button class="hamburger" id="hamburger">☰</button>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+    <ul class="nav-menu">
+      <li><a href="index.html"> Beranda</a></li>
+      <li><a href="transaksi.html"> Transaksi</a></li>
+      <li><a href="anggaran.html"> Anggaran</a></li>
+      <li><a href="laporan.html"> Laporan</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <a href="tentang.html" class="active" style="color:#fff;">Tentang aplikasi ini →</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <span class="eyebrow">Tentang</span>
+      <h1>Tentang DompetIn</h1>
+      <p>Aplikasi web sederhana untuk membantu mahasiswa mengatur uang saku dan pengeluaran harian.</p>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=70" alt="Ilustrasi mengatur keuangan dengan kalkulator dan catatan" style="border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 20px;">
+
+        <div class="receipt-card">
+          <h3 style="margin-bottom:10px;">Kenapa Perlu Atur Budget?</h3>
+          <p style="color:var(--text-muted); font-size:0.94rem;">
+            Buat mahasiswa, uang saku atau gaji bulanan sering habis sebelum waktunya karena
+            tidak tercatat dengan rapi. Dompetku membantu kamu mencatat setiap transaksi,
+            menetapkan batas pengeluaran per kategori, dan melihat gambaran keuangan secara jelas.
+          </p>
+          <ul class="tip-list">
+            <li>Semua data tersimpan langsung di browser kamu (localStorage).</li>
+            <li>Tidak perlu koneksi internet atau server tambahan.</li>
+            <li>Cocok untuk latihan konsep HTML, CSS, dan JavaScript dasar.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="receipt-card">
+        <h3 style="margin-bottom:10px;">Fitur Utama</h3>
+        <ul class="tip-list">
+          <li><strong>Beranda</strong> — ringkasan saldo dan transaksi terbaru.</li>
+          <li><strong>Transaksi</strong> — catat pemasukan/pengeluaran baru.</li>
+          <li><strong>Anggaran</strong> — atur batas belanja per kategori.</li>
+          <li><strong>Laporan</strong> — grafik dan rekap pengeluaran.</li>
+        </ul>
+
+        <h3 style="margin: 22px 0 10px;">Referensi Belajar</h3>
+        <div class="link-list">
+          <a href="https://developer.mozilla.org/id/docs/Web/HTML" target="_blank" rel="noopener">Dokumentasi HTML — MDN Web Docs</a>
+          <a href="https://developer.mozilla.org/id/docs/Web/CSS" target="_blank" rel="noopener">Dokumentasi CSS — MDN Web Docs</a>
+          <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap Framework</a>
+        </div>
+
+        <h3 style="margin: 22px 0 6px;">Dibuat oleh</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">
+          Final Project mata kuliah Pengenalan Perancangan Web (SI071) — Universitas AMIKOM Yogyakarta.
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>

@@ -366,3 +366,5 @@ video { width: 100%; display: block; background: #000; }
   .two-col { grid-template-columns: 1fr; }
   .hero-balance .amount { font-size: 2.1rem; }
 }
+
+

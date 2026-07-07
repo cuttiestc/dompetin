@@ -1,11 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DompetIn — Transaksi</title>
+    <title>Transaksi - DompetIn</title>
+    <link rel="icon" type="image/x-icon" href="logo.svg">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+<div class="topbar">
+  <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+  <button class="hamburger" id="hamburger">☰</button>
+</div>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+    <ul class="nav-menu">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="transaksi.html" class="active">Transaksi</a></li>
+      <li><a href="anggaran.html">Anggaran</a></li>
+      <li><a href="laporan.html">Laporan</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <a href="tentang.html">Tentang aplikasi ini →</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <span class="eyebrow">Catat</span>
+      <h1>Transaksi</h1>
+      <p>Tambahkan pemasukan atau pengeluaran baru, lalu lihat semua riwayatnya di tabel bawah.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="form-card">
+        <h3 style="margin-bottom:18px;">Tambah Transaksi</h3>
+        <form id="formTransaksi">
+          <div class="form-row">
+            <label>Jenis</label>
+            <div class="type-toggle">
+              <label class="opt-income">
+                <input type="radio" name="tipe" value="income" checked>
+                <span>Pemasukan</span>
+              </label>
+              <label class="opt-expense">
+                <input type="radio" name="tipe" value="expense">
+                <span>Pengeluaran</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="deskripsi">Deskripsi</label>
+            <input type="text" id="deskripsi" name="deskripsi" placeholder="Contoh: Uang saku, makan siang, dll" required>
+          </div>
+
+          <div class="form-row">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" name="kategori" required>
+              <option value="">-- pilih kategori --</option>
+              <option value="Pemasukan">Pemasukan</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Transportasi">Transportasi</option>
+              <option value="Kebutuhan">Kebutuhan</option>
+              <option value="Hiburan">Hiburan</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="jumlah">Jumlah (Rp)</label>
+            <input type="number" id="jumlah" name="jumlah" min="1" placeholder="Contoh: 50000" required>
+          </div>
+
+          <div class="form-row">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+          </div>
+
+          <button type="submit" class="btn">Simpan Transaksi</button>
+          <p class="form-msg" id="formMsg"></p>
+        </form>
+      </div>
+
+      <div class="receipt-card">
+        <h3 style="margin-bottom:6px;">Tips Cepat</h3>
+        <ul class="tip-list">
+          <li>Catat transaksi sesegera mungkin biar nggak lupa jumlahnya.</li>
+          <li>Pilih kategori yang sesuai supaya laporan dan anggaran akurat.</li>
+          <li>Pemasukan tambahan (freelance, hadiah) tetap dicatat sebagai kategori Pemasukan.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="receipt-card" style="margin-top:28px;">
+      <h3 style="margin-bottom:14px;">Riwayat Transaksi</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tanggal</th><th>Deskripsi</th><th>Kategori</th><th>Jumlah</th><th></th></tr>
+          </thead>
+          <tbody id="listBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // ---- Blok JS #3: form tambah transaksi + validasi ----
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('tanggal').valueAsDate = new Date();
+    renderList();
+
+    document.getElementById('formTransaksi').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const deskripsi = document.getElementById('deskripsi').value.trim();
+      const kategori = document.getElementById('kategori').value;
+      const jumlah = parseInt(document.getElementById('jumlah').value, 10);
+      const tanggal = document.getElementById('tanggal').value;
+      const tipe = document.querySelector('input[name="tipe"]:checked').value;
+      const msg = document.getElementById('formMsg');
+
+      // validasi sederhana
+      if (!deskripsi || !kategori || !tanggal || !jumlah || jumlah <= 0) {
+        msg.textContent = 'Semua kolom wajib diisi dan jumlah harus lebih dari 0.';
+        msg.className = 'form-msg show error';
+        return;
+      }
+
+      const data = getTransaksi();
+      const newId = data.length ? Math.max.apply(null, data.map(function (t) { return t.id; })) + 1 : 1;
+
+      data.push({ id: newId, tanggal: tanggal, deskripsi: deskripsi, kategori: kategori, tipe: tipe, jumlah: jumlah });
+      saveTransaksi(data);
+
+      msg.textContent = 'Transaksi berhasil disimpan!';
+      msg.className = 'form-msg show success';
+
+      this.reset();
+      document.getElementById('tanggal').valueAsDate = new Date();
+      renderList();
+    });
+  });
+
+  // ---- Blok JS #4: render tabel + hapus transaksi ----
+  function renderList() {
+    const data = getTransaksi().slice().sort(function (a, b) {
+      return new Date(b.tanggal) - new Date(a.tanggal);
+    });
+    const body = document.getElementById('listBody');
+
+    if (data.length === 0) {
+      body.innerHTML = '<tr><td colspan="5">Belum ada transaksi.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = data.map(function (t) {
+      return '<tr>' +
+        '<td>' + formatTanggal(t.tanggal) + '</td>' +
+        '<td>' + t.deskripsi + '</td>' +
+        '<td><span class="tag">' + t.kategori + '</span></td>' +
+        '<td class="amount ' + t.tipe + '">' + (t.tipe === 'income' ? '+' : '-') + formatRupiah(t.jumlah) + '</td>' +
+        '<td class="row-actions"><button onclick="hapusTransaksi(' + t.id + ')">Hapus</button></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  function hapusTransaksi(id) {
+    if (!confirm('Hapus transaksi ini?')) return;
+    const data = getTransaksi().filter(function (t) { return t.id !== id; });
+    saveTransaksi(data);
+    renderList();
+  }
+</script>
 </body>
 </html>

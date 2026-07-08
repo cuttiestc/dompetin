@@ -72,6 +72,15 @@ img { max-width: 100%; display: block; }
   color: #fff;
 }
 
+.brand-name {
+  color: inherit;
+}
+
+.brand-accent {
+  color: #F4C542;
+  text-shadow: 0 0 8px rgba(244, 197, 66, 0.25);
+}
+
 .brand .coin {
   width: 30px; height: 30px;
   border-radius: 50%;

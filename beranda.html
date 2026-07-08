@@ -34,7 +34,7 @@
   <main class="main">
     <div class="page-header">
       <span class="eyebrow">Ringkasan</span>
-      <h1>Halo, ini kondisi dompetmu</h1>
+      <h1 id="welcomeMessage">Halo, ini kondisi dompetmu</h1>
       <p>Pantau pemasukan, pengeluaran, dan sisa saldo kamu bulan ini dalam satu tampilan.</p>
     </div>
 
@@ -81,6 +81,12 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', function () {
+    const username = localStorage.getItem('username') || 'teman';
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    if (welcomeMessage) {
+      welcomeMessage.textContent = 'Halo ' + username + ', ini kondisi dompetmu';
+    }
+
     const data = getTransaksi();
 
     let income = 0, expense = 0;

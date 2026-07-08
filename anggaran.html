@@ -15,9 +15,12 @@
 
 <div class="app-shell">
   <aside class="sidebar" id="sidebar">
-    <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+    <div class="brand">
+        <img src="logo.svg" alt="Logo DompetIn" class="logo">
+        <span>DompetIn</span>
+    </div>
     <ul class="nav-menu">
-      <li><a href="index.html"> Beranda</a></li>
+      <li><a href="beranda.html"> Beranda</a></li>
       <li><a href="transaksi.html"> Transaksi</a></li>
       <li><a href="anggaran.html" class="active"> Anggaran</a></li>
       <li><a href="laporan.html"> Laporan</a></li>
@@ -95,7 +98,7 @@
           '<span class="cat-figures">' + formatRupiah(terpakai) + ' / ' + formatRupiah(b.batas) + '</span>' +
         '</div>' +
         '<div class="bar-track"><div class="bar-fill' + (over ? ' over' : '') + '" style="width:' + persen + '%"></div></div>' +
-        (over ? '<div class="warn">⚠ Sudah melebihi anggaran ' + formatRupiah(terpakai - b.batas) + '</div>' : '') +
+        (over ? '<div class="warn">⚠️ Sudah melebihi anggaran ' + formatRupiah(terpakai - b.batas) + '</div>' : '') +
         '</div>';
     }).join('');
   }

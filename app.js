@@ -1,15 +1,20 @@
 // ================= LOGIN =================
 function loginAccount() {
-    const username = document.getElementById("usernameInput").value;
+    const username = document.getElementById("usernameInput").value.trim();
     const password = document.getElementById("passwordInput").value;
 
     if (username === "" || password === "") {
         alert("Username dan Password tidak boleh kosong!");
+        localStorage.setItem("isLogin", "false");
+    }
+    else {
+        localStorage.setItem("username", username);
+        localStorage.setItem("isLogin", "true");
+        alert("Login Berhasil!");
+        window.location.href = "beranda.html";
         return;
     }
 
-    localStorage.setItem("isLogin", "true");
-    alert("Login berhasil!");
 }
 
 // ================= DATA TRANSAKSI =================

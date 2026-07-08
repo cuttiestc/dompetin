@@ -1,6 +1,6 @@
 // ================= LOGIN =================
 function loginAccount() {
-    const username = document.getElementById("usernameInput").value;
+    const username = document.getElementById("usernameInput").value.trim();
     const password = document.getElementById("passwordInput").value;
 
     if (username === "" || password === "") {
@@ -8,8 +8,9 @@ function loginAccount() {
         localStorage.setItem("isLogin", "false");
     }
     else {
-        alert("Login Berhasil!");
+        localStorage.setItem("username", username);
         localStorage.setItem("isLogin", "true");
+        alert("Login Berhasil!");
         window.location.href = "beranda.html";
         return;
     }

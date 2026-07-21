@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-    <title>Anggaran - DompetIn</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi & Anggaran - DompetIn</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="logo.svg">
 </head>
 <body>
 
@@ -14,6 +15,7 @@
 </div>
 
 <div class="app-shell">
+  <!-- Sidebar Navigasi Terhubung -->
   <aside class="sidebar" id="sidebar">
     <div class="brand">
         <img src="logo.svg" alt="Logo DompetIn" class="logo">
@@ -21,8 +23,7 @@
     </div>
     <ul class="nav-menu">
       <li><a href="beranda.html"> Beranda</a></li>
-      <li><a href="transaksi.html"> Transaksi</a></li>
-      <li><a href="anggarantrans.html" class="active"> Anggaran & Transaksi</a></li>
+      <li><a href="anggarantrans.html" class="active"> Transaksi & Anggaran</a></li>
       <li><a href="laporan.html"> Laporan</a></li>
     </ul>
     <div class="sidebar-footer">
@@ -32,37 +33,122 @@
 
   <main class="main">
     <div class="page-header">
-      <span class="eyebrow">Batasi</span>
-      <h1>Anggaran per Kategori</h1>
-      <p>Tentukan batas pengeluaran tiap kategori, lalu lihat progresnya dibanding pengeluaran bulan ini.</p>
+      <span class="eyebrow">Kelola Keuangan</span>
+      <h1>Transaksi & Anggaran Terpadu</h1>
+      <p>Atur limit belanja per kategori dan catat riwayat transaksi harian kamu di sini.</p>
     </div>
 
     <div class="two-col">
-      <div>
-        <div class="budget-list" id="budgetList"></div>
+      <!-- Kolom Kiri: Progress Anggaran & Riwayat Transaksi -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Status Anggaran -->
+        <div class="receipt-card">
+          <h3 style="margin-bottom: 14px;">📊 Progres Anggaran per Kategori</h3>
+          <div class="budget-list" id="budgetList"></div>
+        </div>
+
+        <!-- Tabel Transaksi -->
+        <div class="receipt-card">
+          <h3 style="margin-bottom: 14px;">📝 Riwayat Transaksi</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Deskripsi</th>
+                  <th>Kategori</th>
+                  <th>Jumlah</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="transaksiBody"></tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
 
-      <div class="form-card">
-        <h3 style="margin-bottom:18px;">Atur Batas Anggaran</h3>
-        <form id="formBudget">
-          <div class="form-row">
-            <label for="kategoriBudget">Kategori</label>
-            <select id="kategoriBudget" required>
-              <option value="">-- pilih kategori --</option>
-              <option value="Makanan">Makanan</option>
-              <option value="Transportasi">Transportasi</option>
-              <option value="Kebutuhan">Kebutuhan</option>
-              <option value="Hiburan">Hiburan</option>
-              <option value="Lainnya">Lainnya</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="batasBudget">Batas Anggaran (Rp)</label>
-            <input type="number" id="batasBudget" min="1" placeholder="Contoh: 300000" required>
-          </div>
-          <button type="submit" class="btn">Simpan Anggaran</button>
-          <p class="form-msg" id="budgetMsg"></p>
-        </form>
+      <!-- Kolom Kanan: Form Tambah Transaksi & Form Set Anggaran -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Form Transaksi -->
+        <div class="form-card" style="max-width: 100%;">
+          <h3 style="margin-bottom: 18px;">+ Catat Transaksi Baru</h3>
+          <form id="formTransaksi">
+            <div class="form-row">
+              <label for="tanggal">Tanggal</label>
+              <input type="date" id="tanggal" required>
+            </div>
+
+            <div class="form-row">
+              <label for="deskripsi">Deskripsi</label>
+              <input type="text" id="deskripsi" placeholder="Contoh: Makan siang warteg" required>
+            </div>
+
+            <div class="form-row">
+              <label for="kategori">Kategori</label>
+              <select id="kategori" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Makanan">Makanan</option>
+                <option value="Transportasi">Transportasi</option>
+                <option value="Kebutuhan">Kebutuhan</option>
+                <option value="Hiburan">Hiburan</option>
+                <option value="Pemasukan">Pemasukan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label>Tipe Transaksi</label>
+              <div class="type-toggle">
+                <label class="opt-income">
+                  <input type="radio" name="tipe" value="income" checked>
+                  <span>Pemasukan</span>
+                </label>
+                <label class="opt-expense">
+                  <input type="radio" name="tipe" value="expense">
+                  <span>Pengeluaran</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="jumlah">Jumlah (Rp)</label>
+              <input type="number" id="jumlah" min="1" placeholder="Contoh: 25000" required>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Simpan Transaksi</button>
+            <p class="form-msg" id="transaksiMsg"></p>
+          </form>
+        </div>
+
+        <!-- Form Anggaran -->
+        <div class="form-card" style="max-width: 100%;">
+          <h3 style="margin-bottom: 18px;">🎯 Atur Batas Anggaran</h3>
+          <form id="formBudget">
+            <div class="form-row">
+              <label for="kategoriBudget">Kategori Pengeluaran</label>
+              <select id="kategoriBudget" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Makanan">Makanan</option>
+                <option value="Transportasi">Transportasi</option>
+                <option value="Kebutuhan">Kebutuhan</option>
+                <option value="Hiburan">Hiburan</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="batasBudget">Batas Anggaran (Rp)</label>
+              <input type="number" id="batasBudget" min="1" placeholder="Contoh: 300000" required>
+            </div>
+
+            <button type="submit" class="btn secondary" style="width: 100%;">Simpan Anggaran</button>
+            <p class="form-msg" id="budgetMsg"></p>
+          </form>
+        </div>
+
       </div>
     </div>
   </main>
@@ -70,71 +156,119 @@
 
 <script src="app.js"></script>
 <script>
-  // ---- Blok JS #5: hitung pengeluaran per kategori & render progress bar ----
-  function renderBudget() {
-    const transaksi = getTransaksi().filter(function (t) { return t.tipe === 'expense'; });
-    const budget = getBudget();
+  document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tanggal').value = today;
 
-    const totalPerKategori = {};
-    transaksi.forEach(function (t) {
-      totalPerKategori[t.kategori] = (totalPerKategori[t.kategori] || 0) + t.jumlah;
+    renderAll();
+
+    // Submit Transaksi Baru
+    document.getElementById('formTransaksi').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const tanggal = document.getElementById('tanggal').value;
+      const deskripsi = document.getElementById('deskripsi').value;
+      const kategori = document.getElementById('kategori').value;
+      const tipe = document.querySelector('input[name="tipe"]:checked').value;
+      const jumlah = parseInt(document.getElementById('jumlah').value, 10);
+      const msg = document.getElementById('transaksiMsg');
+
+      const listTransaksi = getTransaksi();
+      const newId = listTransaksi.length > 0 ? Math.max(...listTransaksi.map(t => t.id)) + 1 : 1;
+
+      listTransaksi.unshift({ id: newId, tanggal, deskripsi, kategori, tipe, jumlah });
+      saveTransaksi(listTransaksi);
+
+      msg.textContent = 'Transaksi berhasil disimpan!';
+      msg.className = 'form-msg show success';
+
+      this.reset();
+      document.getElementById('tanggal').value = today;
+      renderAll();
+      setTimeout(() => { msg.className = 'form-msg'; }, 3000);
     });
 
-    const list = document.getElementById('budgetList');
-
-    if (budget.length === 0) {
-      list.innerHTML = '<div class="empty-state"><span></span>Belum ada anggaran diatur.</div>';
-      return;
-    }
-
-    list.innerHTML = budget.map(function (b) {
-      const terpakai = totalPerKategori[b.kategori] || 0;
-      const persen = Math.min(100, Math.round((terpakai / b.batas) * 100));
-      const over = terpakai > b.batas;
-
-      return '<div class="budget-item">' +
-        '<div class="top-row">' +
-          '<span class="cat-name">' + b.kategori + '</span>' +
-          '<span class="cat-figures">' + formatRupiah(terpakai) + ' / ' + formatRupiah(b.batas) + '</span>' +
-        '</div>' +
-        '<div class="bar-track"><div class="bar-fill' + (over ? ' over' : '') + '" style="width:' + persen + '%"></div></div>' +
-        (over ? '<div class="warn">⚠️ Sudah melebihi anggaran ' + formatRupiah(terpakai - b.batas) + '</div>' : '') +
-        '</div>';
-    }).join('');
-  }
-
-  // ---- Blok JS #6: form set/update anggaran ----
-  document.addEventListener('DOMContentLoaded', function () {
-    renderBudget();
-
+    // Submit Anggaran Baru
     document.getElementById('formBudget').addEventListener('submit', function (e) {
       e.preventDefault();
       const kategori = document.getElementById('kategoriBudget').value;
       const batas = parseInt(document.getElementById('batasBudget').value, 10);
       const msg = document.getElementById('budgetMsg');
 
-      if (!kategori || !batas || batas <= 0) {
-        msg.textContent = 'Pilih kategori dan isi batas anggaran yang valid.';
-        msg.className = 'form-msg show error';
-        return;
-      }
-
-      const budget = getBudget();
-      const existing = budget.find(function (b) { return b.kategori === kategori; });
+      const listBudget = getBudget();
+      const existing = listBudget.find(b => b.kategori === kategori);
       if (existing) {
         existing.batas = batas;
       } else {
-        budget.push({ kategori: kategori, batas: batas });
+        listBudget.push({ kategori, batas });
       }
-      saveBudget(budget);
+
+      saveBudget(listBudget);
 
       msg.textContent = 'Anggaran ' + kategori + ' berhasil disimpan.';
       msg.className = 'form-msg show success';
 
       this.reset();
-      renderBudget();
+      renderAll();
+      setTimeout(() => { msg.className = 'form-msg'; }, 3000);
     });
   });
+
+  function deleteTransaksi(id) {
+    if (confirm('Hapus transaksi ini?')) {
+      let listTransaksi = getTransaksi();
+      listTransaksi = listTransaksi.filter(t => t.id !== id);
+      saveTransaksi(listTransaksi);
+      renderAll();
+    }
+  }
+
+  function renderAll() {
+    const transaksi = getTransaksi();
+    const budget = getBudget();
+
+    const pengeluaranPerKategori = {};
+    transaksi.forEach(t => {
+      if (t.tipe === 'expense') {
+        pengeluaranPerKategori[t.kategori] = (pengeluaranPerKategori[t.kategori] || 0) + t.jumlah;
+      }
+    });
+
+    // Render Progress Anggaran
+    const budgetListEl = document.getElementById('budgetList');
+    if (budget.length === 0) {
+      budgetListEl.innerHTML = '<div class="empty-state">Belum ada anggaran diatur.</div>';
+    } else {
+      budgetListEl.innerHTML = budget.map(b => {
+        const terpakai = pengeluaranPerKategori[b.kategori] || 0;
+        const persen = Math.min(100, Math.round((terpakai / b.batas) * 100));
+        const over = terpakai > b.batas;
+
+        return '<div class="budget-item">' +
+          '<div class="top-row"><span class="cat-name">' + b.kategori + '</span><span class="cat-figures">' + formatRupiah(terpakai) + ' / ' + formatRupiah(b.batas) + '</span></div>' +
+          '<div class="bar-track"><div class="bar-fill' + (over ? ' over' : '') + '" style="width:' + persen + '%"></div></div>' +
+          (over ? '<div class="warn">⚠️ Melebihi anggaran ' + formatRupiah(terpakai - b.batas) + '</div>' : '') +
+          '</div>';
+      }).join('');
+    }
+
+    // Render Tabel Transaksi
+    const transaksiBodyEl = document.getElementById('transaksiBody');
+    const sorted = transaksi.slice().sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+
+    if (sorted.length === 0) {
+      transaksiBodyEl.innerHTML = '<tr><td colspan="5">Belum ada transaksi.</td></tr>';
+    } else {
+      transaksiBodyEl.innerHTML = sorted.map(t => {
+        return '<tr>' +
+          '<td>' + formatTanggal(t.tanggal) + '</td>' +
+          '<td>' + t.deskripsi + '</td>' +
+          '<td><span class="tag">' + t.kategori + '</span></td>' +
+          '<td class="amount ' + t.tipe + '">' + (t.tipe === 'income' ? '+' : '-') + formatRupiah(t.jumlah) + '</td>' +
+          '<td class="row-actions"><button onclick="deleteTransaksi(' + t.id + ')">Hapus</button></td>' +
+          '</tr>';
+      }).join('');
+    }
+  }
 </script>
 </body>
 </html>

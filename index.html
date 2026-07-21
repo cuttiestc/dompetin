@@ -1,70 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DompetIn</title>
+    <title>DompetIn - Atur Keuangan Mahasiswa Lebih Mudah</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logo.svg">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <style>
+      .landing-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+      }
+      .hero-section {
+        padding: 60px 40px;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .hero-section h1 {
+        font-size: 2.8rem;
+        margin-bottom: 16px;
+      }
+      .hero-section p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 28px;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        padding: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .feature-card {
+        background: var(--surface);
+        padding: 28px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .feature-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.25rem;
+      }
+    </style>
 </head>
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-    .btn-login {
-        background-color: #3E63DD;
-        border-color: #3E63DD;
-        color: #fff;
-    }
-    .btn-login:hover {
-        background-color: #6B7280;
-        border-color: #6B7280;
-        color: #fff;
-    }
-    body .container {
-        margin-top: 100px;
-    }
-
-</style>
 <body>
-    <div class="container" style="max-width: 500px">
-      <div class="card shadow border-0 p-4 rounded-4">
-        <img src="logo.svg" alt="Logo" class="mx-auto d-block mb-4" style="width: 100px; height: 100px;">
-        <h2 class="text-center text-dark mb-4 fw-bold">Login to Your Account</h2>
-        <p class="text-center text-muted mb-4">Please enter your username and password to login.</p>
 
-        <div class="mb-4">
-          <input
-            type="text"
-            id="usernameInput"
-            class="form-control form-control-lg fs-6"
-            placeholder="Masukkan username"
-          />
-        </div>
-
-        <div class="mb-4">
-          <input
-            type="password"
-            id="passwordInput"
-            class="form-control form-control-lg fs-6"
-            placeholder="Masukkan password"
-          />
-        </div>
-
-        <div class="row g-3 justify-content-center mb-4">
-          <div class="col-6">
-            <button
-              class="btn btn-login w-100 py-2 fw-semibold
-            d-flex align-items-center justify-content-center gap-2 "
-              onclick="loginAccount()">Login
-            </button>
-          </div>
-        </div>
-      </div>
+  <!-- Header Navigasi Landing Page -->
+  <header class="landing-nav">
+    <div class="brand">
+      <img src="logo.svg" alt="Logo DompetIn" class="logo" style="width: 32px; height: 32px;">
+      <span>DompetIn</span>
     </div>
+    <div>
+      <a href="login.html" class="btn secondary" style="margin-right: 8px;">Masuk</a>
+      <a href="login.html" class="btn">Daftar Gratis</a>
+    </div>
+  </header>
 
-    <script src = "app.js"></script>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <span class="eyebrow" style="color: var(--primary); font-weight: 600;">Aplikasi Keuangan Mahasiswa</span>
+    <h1>Kelola Uang Saku & Anggaran Harian Tanpa Ribet</h1>
+    <p>DompetIn membantu mahasiswa mencatat pengeluaran, membatasi anggaran bulanan, dan memantau kesehatan finansial secara akurat.</p>
+    <div style="display: flex; gap: 14px; justify-content: center;">
+      <a href="login.html" class="btn" style="font-size: 1rem; padding: 14px 28px;">Mulai Sekarang — Gratis</a>
+      <a href="tentang.html" class="btn secondary" style="font-size: 1rem; padding: 14px 28px;">Pelajari Lebih Lanjut</a>
+    </div>
+  </section>
+
+  <!-- Fitur Utama -->
+  <section class="features-grid">
+    <div class="feature-card">
+      <h3>📊 Batasi Anggaran</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem;">Atur batas belanja untuk makanan, transportasi, dan hiburan. Dapatkan peringatan saat anggaran hampir habis.</p>
+    </div>
+    <div class="feature-card">
+      <h3>💸 Pencatatan Transaksi</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem;">Catat setiap pemasukan dan pengeluaran harian dengan cepat dan teratur dalam satu tempat.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📈 Laporan Visual</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem;">Lihat rekap keuangan dalam bentuk grafik yang mudah dipahami untuk evaluasi bulanan.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.88rem;">
+    &copy; 2026 DompetIn — Final Project Pengenalan Perancangan Web.
+  </footer>
 
 </body>
 </html>

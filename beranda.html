@@ -10,7 +10,7 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+  <div class="brand"><span class="coin">Rp</span> <span class="brand-name">Dompet<span class="brand-accent">In</span></span></div>
   <button class="hamburger" id="hamburger">☰</button>
 </div>
 
@@ -18,22 +18,22 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
         <img src="logo.svg" alt="Logo DompetIn" class="logo">
-        <span>DompetIn</span>
+        <span class="brand-name">Dompet<span class="brand-accent">In</span></span>
     </div>
     <ul class="nav-menu">
       <li><a href="beranda.html" class="active"> Beranda</a></li>
-      <li><a href="anggarantrans.html">Anggaran&Transaksi</a></li>
+      <li><a href="anggarantrans.html">Anggaran & Transaksi</a></li>
       <li><a href="laporan.html">Laporan</a></li>
     </ul>
     <div class="sidebar-footer">
-      <a href="tentang.html">Tentang aplikasi ini →</a>
+      <a href="tentang.html">Tentang web ini →</a>
     </div>
   </aside>
 
   <main class="main">
     <div class="page-header">
       <span class="eyebrow">Ringkasan</span>
-      <h1>Halo, ini kondisi dompetmu</h1>
+      <h1 id="welcomeMessage">Halo, ini kondisi dompetmu</h1>
       <p>Pantau pemasukan, pengeluaran, dan sisa saldo kamu bulan ini dalam satu tampilan.</p>
     </div>
 
@@ -80,6 +80,12 @@
 <script>
 
   document.addEventListener('DOMContentLoaded', function () {
+    const username = localStorage.getItem('username') || 'teman';
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    if (welcomeMessage) {
+      welcomeMessage.textContent = 'Halo ' + username + ', ini kondisi dompetmu';
+    }
+
     const data = getTransaksi();
 
     let income = 0, expense = 0;

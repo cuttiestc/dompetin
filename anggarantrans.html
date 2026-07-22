@@ -10,7 +10,10 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span class="coin">Rp</span> DompetIn</div>
+  <div class="brand">
+    <img src="logo.svg" alt="Logo DompetIn" class="logo">
+    <span class="brand-name">Dompet<span class="brand-accent">In</span></span>
+  </div>
   <button class="hamburger" id="hamburger">☰</button>
 </div>
 
@@ -19,38 +22,41 @@
   <aside class="sidebar" id="sidebar">
     <div class="brand">
         <img src="logo.svg" alt="Logo DompetIn" class="logo">
-        <span>DompetIn</span>
+        <span class="brand-name">Dompet<span class="brand-accent">In</span></span>
     </div>
     <ul class="nav-menu">
       <li><a href="beranda.html"> Beranda</a></li>
-      <li><a href="anggarantrans.html" class="active"> Transaksi & Anggaran</a></li>
+      <li><a href="anggarantrans.html" class="active">Keuangan</a></li>
       <li><a href="laporan.html"> Laporan</a></li>
     </ul>
     <div class="sidebar-footer">
-      <a href="tentang.html">Tentang aplikasi ini →</a>
+      <a href="tentang.html">Tentang web ini →</a>
     </div>
   </aside>
 
   <main class="main">
     <div class="page-header">
       <span class="eyebrow">Kelola Keuangan</span>
-      <h1>Transaksi & Anggaran Terpadu</h1>
-      <p>Atur limit belanja per kategori dan catat riwayat transaksi harian kamu di sini.</p>
+      <h1>Transaksi & Anggaran</h1>
+      <p>Catat aktivitas harian dan kelola batas anggaran per kategori dengan tampilan yang lebih fokus.</p>
     </div>
 
-    <div class="two-col">
-      <!-- Kolom Kiri: Progress Anggaran & Riwayat Transaksi -->
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        
-        <!-- Status Anggaran -->
-        <div class="receipt-card">
-          <h3 style="margin-bottom: 14px;">📊 Progres Anggaran per Kategori</h3>
-          <div class="budget-list" id="budgetList"></div>
+    <div class="tab-shell">
+      <div class="tab-header">
+        <button class="tab-button active" data-tab="transaksi">Transaksi</button>
+        <button class="tab-button" data-tab="anggaran">Anggaran</button>
+      </div>
+
+      <div class="tab-panel active" id="panelTransaksi">
+        <div class="transaction-toolbar">
+          <div>
+            <h3>Transaksi</h3>
+          </div>
+          <button type="button" class="btn" id="openTransactionModal">+ Tambah Transaksi</button>
         </div>
 
-        <!-- Tabel Transaksi -->
         <div class="receipt-card">
-          <h3 style="margin-bottom: 14px;">📝 Riwayat Transaksi</h3>
+          <h3 style="margin-bottom: 14px;">📄 Riwayat Transaksi</h3>
           <div class="table-wrap">
             <table>
               <thead>
@@ -66,15 +72,15 @@
             </table>
           </div>
         </div>
-
       </div>
 
-      <!-- Kolom Kanan: Form Tambah Transaksi & Form Set Anggaran -->
-      <div style="display: flex; flex-direction: column; gap: 24px;">
-        
-        <!-- Form Transaksi -->
-        <div class="form-card" style="max-width: 100%;">
-          <h3 style="margin-bottom: 18px;">+ Catat Transaksi Baru</h3>
+      <div class="transaction-modal" id="transactionModal" aria-hidden="true">
+        <div class="transaction-modal-card">
+          <div class="modal-header">
+            <h3>+ Tambah Transaksi</h3>
+            <button type="button" class="modal-close" id="closeTransactionModal" aria-label="Tutup modal">×</button>
+          </div>
+
           <form id="formTransaksi">
             <div class="form-row">
               <label for="tanggal">Tanggal</label>
@@ -122,33 +128,44 @@
             <p class="form-msg" id="transaksiMsg"></p>
           </form>
         </div>
+      </div>
 
-        <!-- Form Anggaran -->
-        <div class="form-card" style="max-width: 100%;">
-          <h3 style="margin-bottom: 18px;">🎯 Atur Batas Anggaran</h3>
-          <form id="formBudget">
-            <div class="form-row">
-              <label for="kategoriBudget">Kategori Pengeluaran</label>
-              <select id="kategoriBudget" required>
-                <option value="">-- Pilih Kategori --</option>
-                <option value="Makanan">Makanan</option>
-                <option value="Transportasi">Transportasi</option>
-                <option value="Kebutuhan">Kebutuhan</option>
-                <option value="Hiburan">Hiburan</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
+      <div class="tab-panel" id="panelAnggaran">
+        <div class="two-col">
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="receipt-card">
+              <h3 style="margin-bottom: 14px;">📊 Progres Anggaran</h3>
+              <div class="budget-list" id="budgetList"></div>
             </div>
+          </div>
 
-            <div class="form-row">
-              <label for="batasBudget">Batas Anggaran (Rp)</label>
-              <input type="number" id="batasBudget" min="1" placeholder="Contoh: 300000" required>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="form-card" style="max-width: 100%;">
+              <h3 style="margin-bottom: 18px;">🎯 Kelola Anggaran</h3>
+              <form id="formBudget">
+                <div class="form-row">
+                  <label for="kategoriBudget">Kategori Pengeluaran</label>
+                  <select id="kategoriBudget" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Makanan">Makanan</option>
+                    <option value="Transportasi">Transportasi</option>
+                    <option value="Kebutuhan">Kebutuhan</option>
+                    <option value="Hiburan">Hiburan</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <label for="batasBudget">Batas Anggaran (Rp)</label>
+                  <input type="number" id="batasBudget" min="1" placeholder="Contoh: 300000" required>
+                </div>
+
+                <button type="submit" class="btn secondary" style="width: 100%;">Simpan Anggaran</button>
+                <p class="form-msg" id="budgetMsg"></p>
+              </form>
             </div>
-
-            <button type="submit" class="btn secondary" style="width: 100%;">Simpan Anggaran</button>
-            <p class="form-msg" id="budgetMsg"></p>
-          </form>
+          </div>
         </div>
-
       </div>
     </div>
   </main>
@@ -158,7 +175,52 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const today = new Date().toISOString().split('T')[0];
+    const modal = document.getElementById('transactionModal');
+    const openModalBtn = document.getElementById('openTransactionModal');
+    const closeModalBtn = document.getElementById('closeTransactionModal');
+
     document.getElementById('tanggal').value = today;
+
+    const openTransactionModal = function () {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeTransactionModal = function () {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    };
+
+    if (openModalBtn) {
+      openModalBtn.addEventListener('click', openTransactionModal);
+    }
+
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', closeTransactionModal);
+    }
+
+    if (modal) {
+      modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          closeTransactionModal();
+        }
+      });
+    }
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        const tab = this.dataset.tab;
+
+        tabButtons.forEach(function (btn) {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        document.getElementById('panelTransaksi').classList.toggle('active', tab === 'transaksi');
+        document.getElementById('panelAnggaran').classList.toggle('active', tab === 'anggaran');
+      });
+    });
 
     renderAll();
 
@@ -183,6 +245,7 @@
 
       this.reset();
       document.getElementById('tanggal').value = today;
+      closeTransactionModal();
       renderAll();
       setTimeout(() => { msg.className = 'form-msg'; }, 3000);
     });

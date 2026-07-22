@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — DompetIn</title>
+    <title>Sign Up — DompetIn</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logo.svg">
     <style>
@@ -20,7 +20,7 @@
         }
 
         .auth-card {
-            width: min(100%, 480px);
+            width: min(100%, 520px);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 20px;
@@ -95,26 +95,36 @@
     <div class="auth-wrap">
       <div class="auth-card">
         <img src="logo.svg" alt="Logo DompetIn" class="auth-logo" style="object-fit: contain;" />
-        <h2 class="auth-title">Masuk ke DompetIn</h2>
-        <p class="auth-subtitle">Silakan masukkan username dan password untuk lanjut ke beranda.</p>
+        <h2 class="auth-title">Buat Akun Baru</h2>
+        <p class="auth-subtitle">Daftar sekarang untuk mulai mengelola keuangan dengan DompetIn.</p>
 
         <div class="field-group">
-          <label for="usernameInput">Username</label>
-          <input type="text" id="usernameInput" placeholder="Masukkan username" />
+          <label for="nameInput">Nama lengkap</label>
+          <input type="text" id="nameInput" placeholder="Masukkan nama lengkap" />
         </div>
 
         <div class="field-group">
-          <label for="passwordInput">Password</label>
-          <input type="password" id="passwordInput" placeholder="Masukkan password" />
+          <label for="usernameRegisterInput">Username</label>
+          <input type="text" id="usernameRegisterInput" placeholder="Masukkan username" />
+        </div>
+
+        <div class="field-group">
+          <label for="passwordRegisterInput">Password</label>
+          <input type="password" id="passwordRegisterInput" placeholder="Masukkan password" />
+        </div>
+
+        <div class="field-group">
+          <label for="confirmPasswordInput">Konfirmasi password</label>
+          <input type="password" id="confirmPasswordInput" placeholder="Konfirmasi password" />
         </div>
 
         <div class="auth-actions">
-          <button class="btn" onclick="loginAccount()">Login</button>
+          <button class="btn" onclick="registerAccount()">Sign Up</button>
         </div>
 
         <p class="auth-bottom">
-          Belum punya akun?
-          <a href="signup.html" class="text-decoration-none fw-semibold">Daftar sekarang</a>
+          Sudah punya akun?
+          <a href="login.html" class="text-decoration-none fw-semibold">Masuk di sini</a>
         </p>
       </div>
     </div>

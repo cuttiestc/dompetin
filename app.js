@@ -1,4 +1,42 @@
-// ================= LOGIN =================
+// ================= AUTH =================
+function registerAccount() {
+    const name = document.getElementById("nameInput").value.trim();
+    const username = document.getElementById("usernameRegisterInput").value.trim();
+    const password = document.getElementById("passwordRegisterInput").value;
+    const confirmPassword = document.getElementById("confirmPasswordInput").value;
+
+    if (!name || !username || !password || !confirmPassword) {
+        alert("Semua field harus diisi!");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Konfirmasi password tidak cocok!");
+        return;
+    }
+
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const userExists = existingUsers.some(user => user.username === username);
+
+    if (userExists) {
+        alert("Username sudah terdaftar, silakan pilih username lain.");
+        return;
+    }
+
+    existingUsers.push({
+        name: name,
+        username: username,
+        password: password
+    });
+
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+    localStorage.setItem("isLogin", "false");
+    localStorage.setItem("username", "");
+
+    alert("Sign Up Berhasil! Silakan login terlebih dahulu.");
+    window.location.href = "login.html";
+}
+
 function loginAccount() {
     const username = document.getElementById("usernameInput").value.trim();
     const password = document.getElementById("passwordInput").value;
@@ -6,15 +44,32 @@ function loginAccount() {
     if (username === "" || password === "") {
         alert("Username dan Password tidak boleh kosong!");
         localStorage.setItem("isLogin", "false");
-    }
-    else {
-        localStorage.setItem("username", username);
-        localStorage.setItem("isLogin", "true");
-        alert("Login Berhasil!");
-        window.location.href = "beranda.html";
         return;
     }
 
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const matchedUser = users.find(user => user.username === username && user.password === password);
+
+    if (!matchedUser) {
+        alert("Username atau password salah! Silakan daftar terlebih dahulu.");
+        localStorage.setItem("isLogin", "false");
+        return;
+    }
+
+    localStorage.setItem("username", username);
+    localStorage.setItem("isLogin", "true");
+    alert("Login Berhasil!");
+    window.location.href = "beranda.html";
+}
+
+function protectAppPages() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const protectedPages = ['beranda.html', 'anggarantrans.html', 'laporan.html'];
+    const isAuthenticated = localStorage.getItem("isLogin") === "true";
+
+    if (protectedPages.includes(currentPage) && !isAuthenticated) {
+        window.location.href = "login.html";
+    }
 }
 
 // ================= DATA TRANSAKSI =================
@@ -110,6 +165,8 @@ function saveBudget(data) {
 
 // ================= MENU MOBILE =================
 document.addEventListener("DOMContentLoaded", function () {
+    protectAppPages();
+
     const hamburger = document.getElementById("hamburger");
     const sidebar = document.getElementById("sidebar");
 
